@@ -7,6 +7,7 @@ export default function AdicionarProduto() {
   const [preco, setPreco] = useState('');
   const [imagemUrl, setImagemUrl] = useState('');
   const [estoque, setEstoque] = useState(1);
+  const [tamanho, setTamanho] = useState(''); // <-- NOVO STATE
   const [categoriaId, setCategoriaId] = useState('');
   const [categorias, setCategorias] = useState([]);
   const [novaCategoria, setNovaCategoria] = useState('');
@@ -60,7 +61,7 @@ export default function AdicionarProduto() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!nome || !preco || !imagemUrl || !categoriaId) {
+    if (!nome || !preco || !imagemUrl || !categoriaId || !tamanho) {
       alert('Preencha todos os campos');
       return;
     }
@@ -76,6 +77,7 @@ export default function AdicionarProduto() {
         preco: parseFloat(preco),
         imagem_url: imagemUrl,
         estoque: parseInt(estoque),
+        tamanho: parseFloat(tamanho), // <-- ENVIANDO O TAMANHO
         categoria_id: parseInt(categoriaId)
       })
     })
@@ -98,6 +100,18 @@ export default function AdicionarProduto() {
         <input type="number" step="0.01" placeholder="Preço" value={preco} onChange={e => setPreco(e.target.value)} required />
         <input type="url" placeholder="URL da Imagem" value={imagemUrl} onChange={e => setImagemUrl(e.target.value)} required />
         <input type="number" placeholder="Estoque" value={estoque} min={1} onChange={e => setEstoque(parseInt(e.target.value) || 1)} required />
+        
+        {/* NOVO INPUT DE TAMANHO */}
+        <input
+          type="number"
+          placeholder="Tamanho do Tênis"
+          value={tamanho}
+          onChange={e => setTamanho(e.target.value)}
+          step="0.5"
+          min="20"
+          max="50"
+          required
+        />
 
         <div style={{ marginTop: 20 }}>
           <button type="button" onClick={() => setMostrarCategorias(!mostrarCategorias)} style={{ padding: '8px 12px', borderRadius: 6 }}>

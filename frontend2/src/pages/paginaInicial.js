@@ -66,7 +66,7 @@ export default function PaginaInicial() {
   return (
     <div className="pagina-inicial">
       <header className="header">
-        <h1>Fashion Shoes</h1>
+        <h1>Pisante's Store</h1>
         <div className="botoes-topo">
           <button className="botao-perfil" onClick={irParaPerfil}>Meu Perfil</button>
           <button className="botao-adicionar" onClick={irParaAdicionarProduto}>Adicionar Tênis</button>

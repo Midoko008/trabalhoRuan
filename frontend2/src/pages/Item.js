@@ -86,7 +86,14 @@ export default function Item() {
         alt={produto.nome}
         style={{ width: '100%', height: 'auto', borderRadius: 8, marginBottom: 20 }}
       />
-      <p><strong>Preço:</strong> R$ {produto.preco.toFixed(2)} <strong>Estoque: {produto.estoque}</strong></p>
+      <p>
+        <strong>Preço:</strong> R$ {produto.preco.toFixed(2)}{' '}
+        <strong>Estoque: {produto.estoque}</strong>
+      </p>
+      {/* Novo campo tamanho */}
+      <p>
+        <strong>Tamanho:</strong> {produto.tamanho}
+      </p>
 
       {produto.usuario && (
         <p>
@@ -120,7 +127,7 @@ export default function Item() {
               .catch(() => alert('Erro ao adicionar ao carrinho'));
           }}
         >
-          Adicionar ao Carrinho
+          Adicionar do Armário
         </button>
       )}
 
@@ -143,7 +150,7 @@ export default function Item() {
           }}
           style={{ backgroundColor: '#dc3545' }}
         >
-          Remover do Carrinho
+          Remover do Armário
         </button>
       )}
 
@@ -153,7 +160,7 @@ export default function Item() {
           style={{ backgroundColor: '#b22222', marginTop: 20 }}
           onClick={deletarProduto}
         >
-          Deletar Produto
+          Deletar Pisante
         </button>
       )}
     </div>

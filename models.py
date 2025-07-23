@@ -62,6 +62,7 @@ class Tenis(db.Model):
     preco = db.Column(db.Float, nullable=False)
     imagem_url = db.Column(db.String(255))
     estoque = db.Column(db.Integer, nullable=False)
+    tamanho = db.Column(db.Float, nullable=False)
 
     corredor_id = db.Column(db.Integer, db.ForeignKey('corredor.id'), nullable=False)
     estilo_id = db.Column(db.Integer, db.ForeignKey('estilo.id'), nullable=True)
