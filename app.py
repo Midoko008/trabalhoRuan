@@ -166,6 +166,7 @@ def listar_tenis():
             'preco': t.preco,
             'imagem_url': t.imagem_url,
             'estoque': t.estoque,
+            'tamanho': t.tamanho,
             'categoria': {
                 'id': t.estilo.id if t.estilo else None,
                 'nome': t.estilo.nome if t.estilo else None
@@ -184,6 +185,7 @@ def obter_tenis(id):
         'preco': t.preco,
         'imagem_url': t.imagem_url,
         'estoque': t.estoque,
+        'tamanho': t.tamanho,
         'categoria': {
             'id': t.estilo.id if t.estilo else None,
             'nome': t.estilo.nome if t.estilo else None
@@ -205,19 +207,21 @@ def criar_tenis():
     preco = dados.get('preco')
     imagem_url = dados.get('imagem_url')
     estoque = dados.get('estoque')
+    tamanho = dados.get('tamanho')
     estilo_id = dados.get('categoria_id')
 
-    if not nome or preco is None or not imagem_url or estoque is None or not estilo_id:
+    if not nome or preco is None or not imagem_url or estoque is None or tamanho is None or not estilo_id:
         return jsonify({'erro': 'Dados incompletos'}), 400
 
     try:
         preco = float(preco)
         estoque = int(estoque)
+        tamanho = float(tamanho)
         estilo_id = int(estilo_id)
         if estoque <= 0:
             return jsonify({'erro': 'Estoque deve ser maior que zero'}), 400
     except (ValueError, TypeError):
-        return jsonify({'erro': 'Preço, estoque ou estilo inválidos'}), 400
+        return jsonify({'erro': 'Preço, estoque, tamanho ou estilo inválidos'}), 400
 
     estilo = Estilo.query.get(estilo_id)
     if not estilo:
@@ -228,6 +232,7 @@ def criar_tenis():
         preco=preco,
         imagem_url=imagem_url,
         estoque=estoque,
+        tamanho=tamanho,
         estilo_id=estilo_id,
         corredor_id=corredor_logado.id
     )
@@ -262,7 +267,7 @@ def deletar_tenis(id):
         db.session.rollback()
         return jsonify({'erro': 'Erro ao deletar tênis'}), 500
 
-# --- Armário (sem usuário_id) ---
+# --- Armário ---
 
 @app.route('/carrinho', methods=['POST'])
 def adicionar_ao_armario():
@@ -300,6 +305,7 @@ def listar_armario():
                 'preco': t.preco,
                 'imagem_url': t.imagem_url,
                 'estoque': t.estoque,
+                'tamanho': t.tamanho,
                 'categoria': {
                     'id': t.estilo.id if t.estilo else None,
                     'nome': t.estilo.nome if t.estilo else None
@@ -336,6 +342,7 @@ def tenis_por_corredor(usuario_id):
             'preco': t.preco,
             'imagem_url': t.imagem_url,
             'estoque': t.estoque,
+            'tamanho': t.tamanho,
             'categoria': {
                 'id': t.estilo.id if t.estilo else None,
                 'nome': t.estilo.nome if t.estilo else None
@@ -354,6 +361,7 @@ def tenis_por_estilo(categoria_id):
             'preco': t.preco,
             'imagem_url': t.imagem_url,
             'estoque': t.estoque,
+            'tamanho': t.tamanho,
             'categoria': {
                 'id': t.estilo.id if t.estilo else None,
                 'nome': t.estilo.nome if t.estilo else None
